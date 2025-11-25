@@ -13,7 +13,7 @@ dist/
 build/
 
 # DuckDB
-*.duckdb
+# *.duckdb - Allow coinflow.duckdb for Streamlit Cloud demo
 *.duckdb.wal
 
 # dlt
