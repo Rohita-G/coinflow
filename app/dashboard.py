@@ -7,6 +7,19 @@ from datetime import datetime
 import subprocess
 import os
 
+# Auto-setup for Streamlit Cloud
+if not os.path.exists(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'coinflow.duckdb')):
+    with st.spinner("Setting up database for first time... This may take a minute."):
+        try:
+            import setup_streamlit
+            if setup_streamlit.setup_database():
+                st.success("Database setup complete! Reloading...")
+                st.rerun()
+            else:
+                st.error("Failed to set up database automatically.")
+        except Exception as e:
+            st.warning(f"Auto-setup failed: {e}. Please run setup manually.")
+
 # Page config
 st.set_page_config(
     page_title="CoinFlow - Crypto Analytics",
