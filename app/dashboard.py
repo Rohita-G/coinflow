@@ -8,65 +8,6 @@ import subprocess
 import os
 import sys
 
-# Auto-setup function for Streamlit Cloud
-def setup_database():
-    """Run the data pipeline to set up the database"""
-    st.info("Setting up CoinFlow database for the first time...")
-    
-    # Get the project root directory (parent of app/)
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    db_path = os.path.join(project_root, "coinflow.duckdb")
-    
-    # Check if database already exists
-    if os.path.exists(db_path):
-        return True
-    
-    try:
-        # Run the ingestion pipeline
-        st.write("Step 1/2: Fetching crypto data from Yahoo Finance...")
-        pipeline_path = os.path.join(project_root, "pipelines", "crypto_source.py")
-        result = subprocess.run(
-            [sys.executable, pipeline_path],
-            cwd=project_root,
-            capture_output=True,
-            text=True,
-            timeout=300
-        )
-        
-        if result.returncode != 0:
-            st.error(f"Pipeline failed: {result.stderr}")
-            return False
-        
-        # Run dbt transformations
-        st.write("Step 2/2: Running dbt transformations...")
-        dbt_dir = os.path.join(project_root, "dbt_project")
-        result = subprocess.run(
-            ["dbt", "run", "--profiles-dir", "."],
-            cwd=dbt_dir,
-            capture_output=True,
-            text=True,
-            timeout=120
-        )
-        
-        if result.returncode != 0:
-            st.error(f"dbt failed: {result.stderr}")
-            return False
-        
-        st.success("Database setup complete!")
-        return True
-        
-    except Exception as e:
-        st.error(f"Setup failed: {e}")
-        return False
-
-# Auto-setup for Streamlit Cloud
-if not os.path.exists(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'coinflow.duckdb')):
-    with st.spinner("Setting up database for first time... This may take 1-2 minutes."):
-        if setup_database():
-            st.rerun()
-        else:
-            st.error("Failed to set up database automatically. Please check the logs.")
-
 # Page config
 st.set_page_config(
     page_title="CoinFlow - Crypto Analytics",
