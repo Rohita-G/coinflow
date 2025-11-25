@@ -18,12 +18,23 @@ st.set_page_config(
 @st.cache_resource
 def get_connection():
     # Use read_only to avoid locking the database
-    return duckdb.connect('/Users/rohita/nyc_taxi_jan_2025_pipeline/coinflow.duckdb', read_only=True)
+    # Use relative path for portability (works locally and on Streamlit Cloud)
+    import os
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'coinflow.duckdb')
+    
+    # Check if database exists
+    if not os.path.exists(db_path):
+        st.error(f"Database not found at {db_path}. Please run the ingestion pipeline first.")
+        return None
+    
+    return duckdb.connect(db_path, read_only=True)
 
 # Get last updated timestamp
 @st.cache_data(ttl=60)
 def get_last_updated():
     conn = get_connection()
+    if conn is None:
+        return None
     try:
         result = conn.execute("""
             SELECT MAX(metric_date) as last_date
@@ -37,6 +48,8 @@ def get_last_updated():
 @st.cache_data(ttl=300)  # Cache for 5 minutes
 def load_data():
     conn = get_connection()
+    if conn is None:
+        return None
     df = conn.execute("""
         SELECT 
             symbol,
@@ -58,7 +71,8 @@ def load_data():
 # Function to refresh data
 def refresh_data():
     """Run the data pipeline and dbt transformations"""
-    project_dir = '/Users/rohita/nyc_taxi_jan_2025_pipeline/coinflow'
+    import os
+    project_dir = os.path.dirname(os.path.dirname(__file__))
     
     # Clear all caches and close connections to release database lock
     st.cache_data.clear()
@@ -121,6 +135,15 @@ st.divider()
 # Load data
 try:
     df = load_data()
+    
+    if df is None:
+        st.error("Unable to connect to database. Please ensure the database file exists.")
+        st.info("Run the following commands to set up the database:")
+        st.code("""
+make run-pipeline
+make dbt-run
+        """)
+        st.stop()
     
     # Sidebar filters
     st.sidebar.header("Filters")
