@@ -1,8 +1,8 @@
-# CoinFlow: Crypto Data Lakehouse 📈
+# CoinFlow: Crypto Data Lakehouse 
 
 A production-grade Data Engineering pipeline for cryptocurrency market analysis, built with the Modern Data Stack (MDS).
 
-## 🎯 Project Overview
+##  Project Overview
 
 CoinFlow demonstrates a complete end-to-end data pipeline:
 - **Ingestion**: Fetch real-time crypto data from Yahoo Finance using `dlt`
@@ -10,7 +10,7 @@ CoinFlow demonstrates a complete end-to-end data pipeline:
 - **Transformation**: Clean and model data using `dbt`
 - **Visualization**: Interactive dashboard built with Streamlit
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Yahoo Finance API
@@ -24,7 +24,7 @@ Yahoo Finance API
    Streamlit (Visualize)
 ```
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 All tools are **100% free and open-source**:
 
@@ -36,7 +36,7 @@ All tools are **100% free and open-source**:
 | **Visualization** | Streamlit | Interactive web dashboard |
 | **Data Source** | yfinance | Free Yahoo Finance API wrapper |
 
-## 📦 Installation
+##  Installation
 
 ### Prerequisites
 - Python 3.8+
@@ -52,7 +52,7 @@ make setup
 pip install -r requirements.txt
 ```
 
-## 🚀 Usage
+##  Usage
 
 ### 1. Run the Ingestion Pipeline
 
@@ -89,22 +89,22 @@ make run-dashboard
 
 Then open http://localhost:8501 in your browser.
 
-## 📊 Dashboard Features
+##  Dashboard Features
 
 - **Real-time Price Tracking**: Current price with 24h change
 - **Candlestick Charts**: Interactive price visualization
 - **Moving Averages**: 7-day and 30-day trends
 - **Daily Returns**: Bar chart showing daily performance
 - **Historical Data Table**: Recent price history
-- **🔄 One-Click Refresh**: Manual data update button
-- **📅 Data Freshness**: Shows last update timestamp
-- **🤖 Auto-Updates**: Optional daily automation via cron
+- ** One-Click Refresh**: Manual data update button
+- ** Data Freshness**: Shows last update timestamp
+- ** Auto-Updates**: Optional daily automation via cron
 
-## 🔄 Keeping Data Fresh
+##  Keeping Data Fresh
 
 ### Option 1: Manual Refresh (In Dashboard)
 
-Click the **"🔄 Refresh Data"** button in the dashboard to fetch the latest prices. This will:
+Click the **" Refresh Data"** button in the dashboard to fetch the latest prices. This will:
 1. Run the ingestion pipeline
 2. Execute dbt transformations
 3. Reload the dashboard with fresh data
@@ -141,7 +141,7 @@ make dbt-run       # Transform data
 # Dashboard auto-refreshes after 5 minutes
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 coinflow/
@@ -162,7 +162,7 @@ coinflow/
 └── README.md
 ```
 
-## 🔄 Complete Workflow
+##  Complete Workflow
 
 Run the entire pipeline from scratch:
 
@@ -177,7 +177,7 @@ make dbt-run
 make run-dashboard
 ```
 
-## 🧪 Data Models
+##  Data Models
 
 ### Staging Layer
 
@@ -206,7 +206,7 @@ This project demonstrates:
 5. **Analytical database** usage (DuckDB)
 6. **Data visualization** best practices
 
-## 🆚 Upgrade from NYC Taxi Project
+##  Upgrade from NYC Taxi Project
 
 | Feature | NYC Taxi | CoinFlow |
 |---------|----------|----------|
@@ -218,7 +218,7 @@ This project demonstrates:
 | Schema Evolution | Manual | Automatic |
 | Data Quality | None | dbt tests |
 
-## 🚧 Future Enhancements
+##  Future Enhancements
 
 - [ ] Add real-time WebSocket streaming
 - [ ] Implement data quality tests (dbt tests)
@@ -227,14 +227,14 @@ This project demonstrates:
 - [ ] Add Airflow/Dagster orchestration
 - [ ] Implement alerting (price thresholds)
 
-## 📝 Notes
+##  Notes
 
 - **Data Freshness**: Run `make run-pipeline` daily to get latest data
 - **Free Tier**: All tools are free with no API limits
 - **Local First**: Everything runs on your machine, no cloud required
 - **Portable**: Can easily move to cloud databases later
 
-## 🤝 Contributing
+##  Contributing
 
 This is a learning project! Feel free to:
 - Add more cryptocurrencies
@@ -242,10 +242,10 @@ This is a learning project! Feel free to:
 - Improve the dashboard UI
 - Add data quality tests
 
-## 📄 License
+##  License
 
 MIT License - Feel free to use this for learning and portfolio projects!
 
 ---
 
-**Built with ❤️ as a Modern Data Stack learning project**
+**Built with  as a Modern Data Stack learning project**

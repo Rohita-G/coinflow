@@ -12,7 +12,7 @@ mkdir -p "$LOG_DIR"
 # Cron job command (runs daily at 9 AM)
 CRON_CMD="0 9 * * * cd $COINFLOW_DIR && make run-pipeline >> $LOG_DIR/pipeline.log 2>&1 && make dbt-run >> $LOG_DIR/dbt.log 2>&1"
 
-echo "🔧 CoinFlow Cron Setup"
+echo " CoinFlow Cron Setup"
 echo "====================="
 echo ""
 echo "This will set up a daily cron job to:"
@@ -23,7 +23,7 @@ echo ""
 
 # Check if cron job already exists
 if crontab -l 2>/dev/null | grep -q "coinflow"; then
-    echo "⚠️  A CoinFlow cron job already exists!"
+    echo "  A CoinFlow cron job already exists!"
     echo ""
     echo "Current cron jobs:"
     crontab -l | grep coinflow
@@ -31,7 +31,7 @@ if crontab -l 2>/dev/null | grep -q "coinflow"; then
     read -p "Do you want to replace it? (y/n): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "❌ Cancelled. No changes made."
+        echo " Cancelled. No changes made."
         exit 0
     fi
     # Remove existing coinflow cron jobs
@@ -42,19 +42,19 @@ fi
 (crontab -l 2>/dev/null; echo "$CRON_CMD") | crontab -
 
 echo ""
-echo "✅ Cron job installed successfully!"
+echo " Cron job installed successfully!"
 echo ""
 echo "📋 Your CoinFlow cron job:"
 echo "$CRON_CMD"
 echo ""
-echo "📁 Logs will be saved to:"
+echo " Logs will be saved to:"
 echo "  - Pipeline: $LOG_DIR/pipeline.log"
 echo "  - dbt: $LOG_DIR/dbt.log"
 echo ""
-echo "🔍 To view your cron jobs:"
+echo " To view your cron jobs:"
 echo "  crontab -l"
 echo ""
-echo "🗑️  To remove the cron job:"
+echo "  To remove the cron job:"
 echo "  crontab -e  (then delete the coinflow line)"
 echo ""
-echo "🎉 Done! Your dashboard will auto-update daily at 9:00 AM."
+echo " Done! Your dashboard will auto-update daily at 9:00 AM."

@@ -1,10 +1,10 @@
 # CoinFlow Auto-Update Quick Guide
 
-## 🔄 Three Ways to Keep Data Fresh
+##  Three Ways to Keep Data Fresh
 
 ### 1. Dashboard Button (Easiest)
 - Open dashboard: http://localhost:8501
-- Click **"🔄 Refresh Data"** button
+- Click **" Refresh Data"** button
 - Wait ~30 seconds for pipeline to run
 - Dashboard auto-reloads with fresh data
 
@@ -23,13 +23,13 @@ cd /Users/rohita/nyc_taxi_jan_2025_pipeline/coinflow
 make run-pipeline && make dbt-run
 ```
 
-## 📅 Data Freshness Indicator
+##  Data Freshness Indicator
 
 The dashboard shows:
 - **"Data last updated: 2025-11-24"** - Data is current
 - **"No data found"** - Run refresh to fetch initial data
 
-## 🔍 Checking Cron Status
+##  Checking Cron Status
 
 ```bash
 # View all cron jobs
@@ -40,7 +40,7 @@ tail -f ~/nyc_taxi_jan_2025_pipeline/coinflow/logs/pipeline.log
 tail -f ~/nyc_taxi_jan_2025_pipeline/coinflow/logs/dbt.log
 ```
 
-## 🗑️ Remove Cron Job
+##  Remove Cron Job
 
 ```bash
 crontab -e
@@ -53,9 +53,9 @@ crontab -e
 2. **Cron Job** → Scheduled task runs commands daily → Logs output
 3. **Dashboard Cache** → Refreshes every 5 minutes automatically
 
-## 💡 Pro Tips
+##  Pro Tips
 
-- **First time?** Click "🔄 Refresh Data" to fetch initial data
+- **First time?** Click " Refresh Data" to fetch initial data
 - **Daily updates?** Run `./setup_cron.sh` once and forget about it
 - **Manual control?** Use the dashboard button anytime
 - **Check freshness** Look at the timestamp at the top of the dashboard

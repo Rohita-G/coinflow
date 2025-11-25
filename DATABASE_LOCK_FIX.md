@@ -23,7 +23,7 @@ make run-dashboard
 
 The dashboard now properly releases the database lock before running the pipeline:
 
-1. Click **"🔄 Refresh Data"** in the dashboard
+1. Click **" Refresh Data"** in the dashboard
 2. The dashboard clears all connections
 3. Pipeline runs successfully
 4. Dashboard reloads with fresh data

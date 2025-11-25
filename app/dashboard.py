@@ -10,7 +10,7 @@ import os
 # Page config
 st.set_page_config(
     page_title="CoinFlow - Crypto Analytics",
-    page_icon="📈",
+    page_icon="",
     layout="wide"
 )
 
@@ -64,7 +64,7 @@ def refresh_data():
     st.cache_data.clear()
     st.cache_resource.clear()
     
-    with st.spinner('🔄 Fetching latest crypto data...'):
+    with st.spinner(' Fetching latest crypto data...'):
         # Run ingestion pipeline
         result1 = subprocess.run(
             ['make', 'run-pipeline'],
@@ -78,7 +78,7 @@ def refresh_data():
             st.error(f"Pipeline failed: {result1.stderr}")
             return False
     
-    with st.spinner('🔄 Running dbt transformations...'):
+    with st.spinner(' Running dbt transformations...'):
         # Run dbt
         result2 = subprocess.run(
             ['make', 'dbt-run'],
@@ -95,7 +95,7 @@ def refresh_data():
     return True
 
 # Main app
-st.title("📈 CoinFlow: Crypto Market Analytics")
+st.title(" CoinFlow: Crypto Market Analytics")
 st.markdown("Real-time cryptocurrency price tracking and analytics powered by Yahoo Finance")
 
 # Top bar with refresh button and last updated
@@ -104,17 +104,17 @@ col_left, col_right = st.columns([3, 1])
 with col_left:
     last_updated = get_last_updated()
     if last_updated:
-        st.info(f"📅 **Data last updated:** {last_updated}")
+        st.info(f" **Data last updated:** {last_updated}")
     else:
-        st.warning("⚠️ No data found. Click 'Refresh Data' to fetch latest prices.")
+        st.warning(" No data found. Click 'Refresh Data' to fetch latest prices.")
 
 with col_right:
-    if st.button("🔄 Refresh Data", type="primary", use_container_width=True):
+    if st.button(" Refresh Data", type="primary", use_container_width=True):
         if refresh_data():
-            st.success("✅ Data refreshed successfully!")
+            st.success(" Data refreshed successfully!")
             st.rerun()
         else:
-            st.error("❌ Failed to refresh data. Check logs.")
+            st.error(" Failed to refresh data. Check logs.")
 
 st.divider()
 
@@ -128,7 +128,7 @@ try:
     selected_symbol = st.sidebar.selectbox("Select Cryptocurrency", symbols, index=0)
     
     st.sidebar.divider()
-    st.sidebar.subheader("📊 Data Info")
+    st.sidebar.subheader(" Data Info")
     st.sidebar.metric("Total Records", len(df))
     st.sidebar.metric("Cryptocurrencies", len(symbols))
     st.sidebar.metric("Date Range", f"{len(df[df['symbol'] == symbols[0]])} days")
@@ -240,7 +240,7 @@ except Exception as e:
     st.error(f"Error loading data: {e}")
     st.info("Make sure you've run the ingestion pipeline and dbt models first!")
     
-    if st.button("🚀 Run Initial Setup", type="primary"):
+    if st.button(" Run Initial Setup", type="primary"):
         if refresh_data():
-            st.success("✅ Setup complete! Reloading...")
+            st.success(" Setup complete! Reloading...")
             st.rerun()
