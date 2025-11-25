@@ -1,0 +1,8 @@
+coinflow:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '/Users/rohita/nyc_taxi_jan_2025_pipeline/coinflow.duckdb'
+      schema: main
+      threads: 1

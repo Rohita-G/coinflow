@@ -1,0 +1,8 @@
+dlt
+duckdb
+dbt-duckdb
+streamlit
+pandas
+requests
+plotly
+python-dotenv

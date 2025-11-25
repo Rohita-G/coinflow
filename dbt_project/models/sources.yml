@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: raw_crypto
+    schema: raw_crypto
+    tables:
+      - name: crypto_ohlcv
